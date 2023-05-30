@@ -1,4 +1,4 @@
-# Star Studio Nails API
+# Point of Sales Restaurant API
 
 To develop locally:
 
@@ -18,7 +18,7 @@ appsettings.json
 ```json
 {
 	"DbConnections": {
-		"SSN": "Server=;Port=;Database=;uid=;pwd=;" // or any other MySQL connection string
+		"POSAPI": "Server=;Port=;Database=;uid=;pwd=;" // or any other MySQL connection string
 	},
 	"Logging": {
 		"LogLevel": {
@@ -26,11 +26,6 @@ appsettings.json
 			"Microsoft": "Warning",
 			"Microsoft.Hosting.Lifetime": "Information"
 		}
-	},
-	"JwtConfig": {
-		"Secret": "", // any string, preferably random
-		"Issuer": "https://**", // base URL of the API
-		"Audience": "https://**" // base URL of the client (if there's multiple you figure out how to deal with it)
 	}
 }
 ```
