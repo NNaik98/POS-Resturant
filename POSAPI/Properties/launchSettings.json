@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DotNetCoreAPI": {
+    "POSAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace DotNetCoreAPI
+namespace POSAPI
 {
     public class Program
     {
