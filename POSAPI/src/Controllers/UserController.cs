@@ -22,13 +22,13 @@ namespace POSAPI.Controllers
             _model = model;
         }
 
-        [HttpGet("Login")]
+        [HttpPut("Login")]
         public ActionResult<String> Login([FromBody] UserRequest LoginDetails)
         {
             
-            var usern = _model.SystemUsers.Where(user => user.Username.Equals(LoginDetails.Username) && (user.Password.Equals(LoginDetails.Password)));
+            var usern = _model.SystemUsers.FirstOrDefault(user => user.Username.Equals(LoginDetails.Username) && (user.Password.Equals(LoginDetails.Password)));
 
-            if (usern.Any() == true)
+            if (usern != null)
             {
                 return Ok(new String("Successfully Logged in"));
             }
