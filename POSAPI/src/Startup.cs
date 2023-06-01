@@ -10,7 +10,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace DotNetCoreAPI
+namespace POSAPI
 {
     public class Startup
     {
