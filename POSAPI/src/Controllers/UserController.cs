@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace POSAPI.Controllers
 {
-    [Route("api/services")]                                 
+    [Route("pos/")]                                 
     [ApiController]
     [Produces("application/json")]
     public class UserController : ControllerBase
