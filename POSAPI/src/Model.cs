@@ -9,6 +9,7 @@ namespace POSAPI
     {
 
         public DbSet<SystemUser> SystemUsers { get; set; }
+        public DbSet <Role> Role{ get; set; }
 
         public Model() { }
 
