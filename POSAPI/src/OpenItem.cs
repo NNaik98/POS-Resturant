@@ -1,7 +1,10 @@
-﻿namespace POSAPI.src
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace POSAPI.src
 {
     public class OpenItem : SalesItem
     {
-        public float Price { get; set; }
+        [Required]
+        public double Price { get; set; }
     }
 }

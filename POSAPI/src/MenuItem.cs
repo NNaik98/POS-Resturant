@@ -1,21 +1,27 @@
 ﻿using POSAPI.EffectiveDating;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POSAPI.src
 {
     public class MenuItem : SalesItem
     {
+        [Column(TypeName = "varchar(255)")]
         public string Description { get; set; }
 
-        public MenuCategory Category { get; set; }
+        [Required]
+        public virtual MenuCategory Category { get; set; }
 
-        public IEnumerable<MenuItemSnapshot> Versions { get; set; }
+        [Required]
+        public virtual IEnumerable<MenuItemSnapshot> Versions { get; set; }
     }
 
     public class MenuItemSnapshot : Snapshot
     {
-        public string Id { get; set; }
+        public double Price { get; set; }
 
-        public float Price { get; set; }
+        [Required]
+        public virtual MenuItem Item { get; set; }
     }
 }
