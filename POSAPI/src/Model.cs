@@ -9,6 +9,7 @@ namespace POSAPI
     public class Model : DbContext
     {
         public DbSet<SystemUser> SystemUsers { get; set; }
+        public DbSet <Role> Role{ get; set; }
 
         public DbSet<MenuCategory> MenuCategories { get; set; }
         

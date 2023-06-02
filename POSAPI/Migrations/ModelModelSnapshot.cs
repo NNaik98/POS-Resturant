@@ -69,6 +69,18 @@ namespace POSAPI.Migrations
                     b.ToTable("SalesItems");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("SalesItem");
+            modelBuilder.Entity("POSAPI.src.Role", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("POSAPI.src.SystemUser", b =>
@@ -77,13 +89,16 @@ namespace POSAPI.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("varchar(255)");
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Password")
-                        .HasColumnType("varchar(255)");
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Username")
-                        .HasColumnType("varchar(255)");
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
