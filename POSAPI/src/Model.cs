@@ -10,6 +10,8 @@ namespace POSAPI
 
         public DbSet<SystemUser> SystemUsers { get; set; }
 
+        public DbSet<UserDetails> UserDetails { get; set; }
+
         public Model() { }
 
         public Model(DbContextOptions<Model> options) : base(options) { }
