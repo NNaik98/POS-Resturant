@@ -6,10 +6,11 @@ namespace POSAPI.src
     {
         [Key]
         public string ID { get; set; }
+        [Required]
         public string DisplayName { get; set; }
-
+        [Required]
         public string Username { get; set; }
-
+        [Required]
         public string Password { get; set; }
 
     }
