@@ -24,11 +24,11 @@ namespace POSAPI.Controllers
 
         [Route("register")]
         [HttpPost]
-        public ActionResult<String> Register([FromBody] UserDetails newuser)
+        public ActionResult<String> Register([FromBody] SystemUser newuser)
         
         {
-            var checkUserName = _model.UserDetails.Any(e => e.Username.Equals(newuser.Username));
-            var checkDisplayName = _model.UserDetails.Any(u => u.DisplayName.Equals(newuser.DisplayName)) ; 
+            var checkUserName = _model.SystemUsers.Any(e => e.Username.Equals(newuser.Username));
+            var checkDisplayName = _model.SystemUsers.Any(u => u.DisplayName.Equals(newuser.DisplayName)) ; 
             if (checkUserName == true) {
                 return BadRequest("Username already taken; Please use another User Name"); 
                }if (checkDisplayName == true)
@@ -36,7 +36,7 @@ namespace POSAPI.Controllers
                 return BadRequest("Display already taken; Please use another Display Name");
             }else
             {
-                _model.UserDetails.Add(newuser);
+                _model.SystemUsers.Add(newuser);
             }
 
             try

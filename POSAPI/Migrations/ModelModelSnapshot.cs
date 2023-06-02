@@ -34,35 +34,10 @@ namespace POSAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("SystemUsers");
+                    b.ToTable("SystemUsers", (string)null);
                 });
 
-            modelBuilder.Entity("POSAPI.src.UserDetails", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserDetails");
-                });
+ 
 #pragma warning restore 612, 618
         }
     }
