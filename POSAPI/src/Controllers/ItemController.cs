@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace POSAPI.Controllers
 {
-    [Route("pos/items")]
+    [Route("pos/")]
     [ApiController]
     [Produces("application/json")]
     public class ItemController : ControllerBase
@@ -55,6 +55,29 @@ namespace POSAPI.Controllers
             catch (Exception)
             {
                 return StatusCode(500, "Failed to add");
+            }
+        }
+
+        [Route("UpdateItem")]
+        [HttpPut]
+        public ActionResult<string> Update(MenuItemRequest updatedItem)
+        {
+            try
+            {
+                var itemFromDb = _model.MenuItems.FirstOrDefault(item => item.Id == updatedItem.Id);
+                var SnapShotID = _model.GetNewId<MenuItemSnapshot>();
+                if (itemFromDb == null) return NotFound("Item not found");
+
+                MenuCategory category = _model.MenuCategories.FirstOrDefault(category => category.Id == updatedItem.CategoryId);
+
+                itemFromDb.copyItem(SnapShotID,updatedItem, category);
+                _model.SaveChanges();
+
+                return Ok("Item successfully updated");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Failed to update the item");
             }
         }
     }
