@@ -5,11 +5,22 @@ namespace POSAPI.src
 {
     public class MenuCategory
     {
-        public string Id { get; set; }
+        public string Id { get; protected set; }
 
         [Column(TypeName = "varchar(255)")]
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
-        public virtual IEnumerable<MenuItem> Items {get;set;}
+        public virtual IEnumerable<MenuItem> Items { get; set; }
+
+        public MenuCategory()
+        {
+
+        }
+
+        public MenuCategory(string id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

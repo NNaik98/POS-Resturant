@@ -5,9 +5,9 @@ namespace POSAPI.EffectiveDating
 {
     public abstract class Snapshot
     {
-        public string Id { get; set; }
+        public string Id { get; protected set; }
 
         [Required]
-        public DateOnly EffectiveDate { get; set; }
+        public DateOnly EffectiveDate { get; protected set; }
     }
 }
