@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,8 @@ namespace POSAPI.src
         [Column(TypeName = "varchar(255)")]
         [Required]
         public string Password { get; set; }
+
+        public virtual IEnumerable<Role> Roles {get;set;}
     }
 }
 

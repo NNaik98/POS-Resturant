@@ -5,14 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace POSAPI.Migrations
 {
-    public partial class Items : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ID",
-                table: "SystemUsers",
-                newName: "Id");
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "MenuCategories",
@@ -26,6 +24,25 @@ namespace POSAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MenuCategories", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "SystemUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DisplayName = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Username = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Password = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SystemUsers", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -58,6 +75,28 @@ namespace POSAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SystemUserId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Roles_SystemUsers_SystemUserId",
+                        column: x => x.SystemUserId,
+                        principalTable: "SystemUsers",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Snapshots",
                 columns: table => new
                 {
@@ -83,6 +122,11 @@ namespace POSAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Roles_SystemUserId",
+                table: "Roles",
+                column: "SystemUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SalesItems_CategoryId",
                 table: "SalesItems",
                 column: "CategoryId");
@@ -96,18 +140,19 @@ namespace POSAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
                 name: "Snapshots");
+
+            migrationBuilder.DropTable(
+                name: "SystemUsers");
 
             migrationBuilder.DropTable(
                 name: "SalesItems");
 
             migrationBuilder.DropTable(
                 name: "MenuCategories");
-
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "SystemUsers",
-                newName: "ID");
         }
     }
 }
