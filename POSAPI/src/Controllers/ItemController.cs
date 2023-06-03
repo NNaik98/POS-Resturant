@@ -34,35 +34,7 @@ namespace POSAPI.Controllers
             return Ok(AllItems); 
         }
 
-        [Route("AddItem")]
-        [HttpPost]
-        public ActionResult<String> AddItem([FromBody] MenuItem newitem)
-
-        {
-
-            var checkItem = _model.MenuItems.Any(u => u.Name.Equals(newitem.Name));
-            if (checkItem == true)
-            {
-                return BadRequest("Item already exist; Please use another Item Name");
-            }
-
-            else
-            {
-                _model.MenuItems.Add(newitem);
-
-            }
-                try
-                {
-                    _model.SaveChanges();
-
-                    return Ok("Successfully Added.");
-                }
-                catch (Exception)
-                {
-                    return StatusCode(500, "Server error, Couldnt add to database. Please try again");
-                }
-            
-        }
+       
 
 
         [Route("AddItem")]

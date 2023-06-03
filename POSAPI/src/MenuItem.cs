@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace POSAPI.src
@@ -16,7 +17,7 @@ namespace POSAPI.src
         public virtual MenuCategory Category { get; set; }
 
         [Required]
-        public virtual IEnumerable<MenuItemSnapshot> Versions { get; set; }
+        public virtual List<MenuItemSnapshot> Versions { get; set; }
 
 
         public MenuItem()
@@ -26,18 +27,15 @@ namespace POSAPI.src
 
         public MenuItem(MenuItemRequest itemToCopy, MenuCategory cat)
         {
-            CopyItemRequest(itemToCopy, cat);
-        }
-
-        public void CopyItemRequest(MenuItemRequest itemToCopy, MenuCategory cat)
-        {
             Id = itemToCopy.Id;
-           
+
             Name = itemToCopy.Name;
             Description = itemToCopy.Description;
-            /*double Price = itemToCopy.Price;
-            */Category = cat;
+            Category = cat;
+            Versions.Add(new(itemToCopy.Id, itemToCopy.Price, itemToCopy.EffectiveDate));
         }
+
+      
     }
 
     public class MenuItemSnapshot : Snapshot
@@ -46,6 +44,21 @@ namespace POSAPI.src
 
         [Required]
         public virtual MenuItem Item { get; set; }
+
+
+        public MenuItemSnapshot()
+        {
+           
+
+        }  
+        public MenuItemSnapshot(string id, double price , DateTime EffectiveDate ) : base( id, EffectiveDate )
+        {
+            Price = price;
+        }
+       
+      
+
+
     }
 
 }

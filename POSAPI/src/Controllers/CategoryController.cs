@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace POSAPI.src.Controllers
 {
-    [Route("pos/items")]
+    [Route("pos/categories")]
     [ApiController]
     [Produces("application/json")]
     public class CategoryController : ControllerBase

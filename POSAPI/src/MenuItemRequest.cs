@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace POSAPI.src
 {
@@ -19,6 +20,6 @@ namespace POSAPI.src
         public string CategoryId { get; set; }
 
         [Required]
-        public string EffectiveDate { get; set; }
+        public DateTime EffectiveDate { get; set; }
     }
 }
