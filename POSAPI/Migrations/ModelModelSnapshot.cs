@@ -51,6 +51,25 @@ namespace POSAPI.Migrations
                     b.ToTable("MenuCategories");
                 });
 
+            modelBuilder.Entity("POSAPI.src.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SystemUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SystemUserId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("POSAPI.src.SalesItem", b =>
                 {
                     b.Property<string>("Id")
@@ -69,18 +88,6 @@ namespace POSAPI.Migrations
                     b.ToTable("SalesItems");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("SalesItem");
-            modelBuilder.Entity("POSAPI.src.Role", b =>
-                {
-                    b.Property<string>("ID")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("POSAPI.src.SystemUser", b =>
@@ -90,15 +97,15 @@ namespace POSAPI.Migrations
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -147,6 +154,13 @@ namespace POSAPI.Migrations
                     b.HasDiscriminator().HasValue("OpenItem");
                 });
 
+            modelBuilder.Entity("POSAPI.src.Role", b =>
+                {
+                    b.HasOne("POSAPI.src.SystemUser", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("SystemUserId");
+                });
+
             modelBuilder.Entity("POSAPI.src.MenuItem", b =>
                 {
                     b.HasOne("POSAPI.src.MenuCategory", "Category")
@@ -172,6 +186,11 @@ namespace POSAPI.Migrations
             modelBuilder.Entity("POSAPI.src.MenuCategory", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("POSAPI.src.SystemUser", b =>
+                {
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("POSAPI.src.MenuItem", b =>
