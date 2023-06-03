@@ -8,20 +8,20 @@ namespace POSAPI.src
     public class MenuItem : SalesItem
     {
         [Column(TypeName = "varchar(255)")]
-        public string Description { get; set; }
+        public string Description { get; protected set; }
 
         [Required]
-        public virtual MenuCategory Category { get; set; }
+        public virtual MenuCategory Category { get; protected set; }
 
         [Required]
-        public virtual IEnumerable<MenuItemSnapshot> Versions { get; set; }
+        public virtual IEnumerable<MenuItemSnapshot> Versions { get; protected set; }
     }
 
     public class MenuItemSnapshot : Snapshot
     {
-        public double Price { get; set; }
+        public double Price { get; protected set; }
 
         [Required]
-        public virtual MenuItem Item { get; set; }
+        public virtual MenuItem Item { get; protected set; }
     }
 }

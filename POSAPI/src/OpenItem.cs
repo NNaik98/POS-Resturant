@@ -5,6 +5,6 @@ namespace POSAPI.src
     public class OpenItem : SalesItem
     {
         [Required]
-        public double Price { get; set; }
+        public double Price { get; protected set; }
     }
 }

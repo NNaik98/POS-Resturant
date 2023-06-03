@@ -8,17 +8,17 @@ namespace POSAPI.Security
         public static string GetHash(string str, string salt, int iterations = 2)
         {
             var hashedString = "";
-            for(int i = 0; i < iterations; i++)
+            for (int i = 0; i < iterations; i++)
             {
-                hashedString += ComputeSha512Hash(hashedString + str + salt);
+                hashedString += ComputeSha256Hash(hashedString + str + salt);
             }
 
             return hashedString;
         }
 
-        private static string ComputeSha512Hash(string rawData)
+        private static string ComputeSha256Hash(string rawData)
         {
-            using SHA512 sha512Hash = SHA512.Create();
+            using SHA256 sha512Hash = SHA256.Create();
 
             byte[] bytes = sha512Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));                                     // ComputeHash - returns byte array  
 

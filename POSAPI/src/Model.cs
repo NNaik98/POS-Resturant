@@ -1,32 +1,30 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using POSAPI.EffectiveDating;
 using POSAPI.src;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 
 namespace POSAPI
 {
     public class Model : DbContext
     {
-        public DbSet<SystemUser> SystemUsers { get; set; }
+        public DbSet<SystemUser> SystemUsers { get; protected set; }
 
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Role> Roles { get; protected set; }
 
-        public DbSet<MenuCategory> MenuCategories { get; set; }
+        public DbSet<MenuCategory> MenuCategories { get; protected set; }
 
-        public DbSet<SalesItem> SalesItems { get; set; }
+        public DbSet<SalesItem> SalesItems { get; protected set; }
 
-        public DbSet<OpenItem> OpenItems { get; set; }
+        public DbSet<OpenItem> OpenItems { get; protected set; }
 
-        public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<MenuItem> MenuItems { get; protected set; }
 
-        public DbSet<Snapshot> Snapshots { get; set; }
+        public DbSet<Snapshot> Snapshots { get; protected set; }
 
-        public DbSet<MenuItemSnapshot> MenuItemSnapshots { get; set; }
+        public DbSet<MenuItemSnapshot> MenuItemSnapshots { get; protected set; }
 
         public Model() { }
 
@@ -68,7 +66,7 @@ namespace POSAPI
                 {
                     if (Roles.Any(r => r.Name == reqRole) != true) // doesn't exist yet
                     {
-                        var role = new Role() { Id = GetNewId<Role>(), Name = reqRole };
+                        var role = new Role(id: GetNewId<Role>(), reqRole);
                         Roles.Add(role);
                     }
                 }
@@ -90,7 +88,7 @@ namespace POSAPI
                 {
                     if (MenuCategories.Any(r => r.Name == reqCat) != true) // doesn't exist yet
                     {
-                        var cat = new MenuCategory() { Id = GetNewId<MenuCategory>(), Name = reqCat };
+                        var cat = new MenuCategory(id: GetNewId<MenuCategory>(), reqCat);
                         MenuCategories.Add(cat);
                     }
                 }
