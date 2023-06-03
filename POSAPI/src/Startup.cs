@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace POSAPI
 {
@@ -53,7 +54,7 @@ namespace POSAPI
                 });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Model model)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +62,8 @@ namespace POSAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "POSAPI"));
             }
+
+            model.Init();
 
             app.UseCors("AllowAll");
            /* app.UseHttpsRedirection();*/

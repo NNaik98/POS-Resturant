@@ -11,8 +11,8 @@ using POSAPI;
 namespace POSAPI.Migrations
 {
     [DbContext(typeof(Model))]
-    [Migration("20230602232438_Items")]
-    partial class Items
+    [Migration("20230603004120_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,25 @@ namespace POSAPI.Migrations
                     b.ToTable("MenuCategories");
                 });
 
+            modelBuilder.Entity("POSAPI.src.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SystemUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SystemUserId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("POSAPI.src.SalesItem", b =>
                 {
                     b.Property<string>("Id")
@@ -79,12 +98,15 @@ namespace POSAPI.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -134,6 +156,13 @@ namespace POSAPI.Migrations
                     b.HasDiscriminator().HasValue("OpenItem");
                 });
 
+            modelBuilder.Entity("POSAPI.src.Role", b =>
+                {
+                    b.HasOne("POSAPI.src.SystemUser", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("SystemUserId");
+                });
+
             modelBuilder.Entity("POSAPI.src.MenuItem", b =>
                 {
                     b.HasOne("POSAPI.src.MenuCategory", "Category")
@@ -159,6 +188,11 @@ namespace POSAPI.Migrations
             modelBuilder.Entity("POSAPI.src.MenuCategory", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("POSAPI.src.SystemUser", b =>
+                {
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("POSAPI.src.MenuItem", b =>
