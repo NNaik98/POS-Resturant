@@ -10,6 +10,6 @@ namespace POSAPI.src
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
 
-        public virtual IEnumerable<MenuItem> Items {get;set;}
+        public virtual List<MenuItem> Items {get;set;}
     }
 }
