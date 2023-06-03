@@ -21,7 +21,7 @@ namespace POSAPI.src
         [Required]
         public string Password { get; set; }
 
-        public virtual IEnumerable<Role> Roles {get;set;}
+        public virtual List<Role> Roles {get;set;}
     }
 }
 
