@@ -8,6 +8,20 @@ namespace POSAPI.EffectiveDating
         public string Id { get; set; }
 
         [Required]
-        public DateOnly EffectiveDate { get; set; }
+        public DateTime EffectiveDate { get; set; }
+
+        public Snapshot()
+        {
+            
+        }
+
+        public Snapshot(string id , DateTime effectiveDate)
+        {
+            Id = id;
+            EffectiveDate = effectiveDate;
+
+        }
     }
+
+
 }
