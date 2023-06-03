@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace POSAPI.src.Controllers
 {
-    [Route("pos/categories")]
+    [Route("pos/")]
     [ApiController]
     [Produces("application/json")]
     public class CategoryController : ControllerBase
@@ -16,7 +16,7 @@ namespace POSAPI.src.Controllers
         {
             _model = model;
         }
-
+        [Route("GetCategories")]
         [HttpGet]
         public ActionResult<IEnumerable<MenuCategory>> Get()
         {
