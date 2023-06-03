@@ -41,9 +41,10 @@ namespace POSAPI.Controllers
         [HttpPost]
         public ActionResult<string> Add(MenuItemRequest newItem)
         {
-            var category = _model.MenuCategories.FirstOrDefault(category => category.Id == newItem.Id);
-            MenuItem itemToAdd = new(newItem, category);
 
+            var category = _model.MenuCategories.FirstOrDefault(category => category.Id == newItem.Id);
+            var SnapShotID = _model.GetNewId<MenuItemSnapshot>();
+            MenuItem itemToAdd = new(SnapShotID, newItem, category);
 
             try
             {

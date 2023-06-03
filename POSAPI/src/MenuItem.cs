@@ -25,14 +25,14 @@ namespace POSAPI.src
 
         }
 
-        public MenuItem(MenuItemRequest itemToCopy, MenuCategory cat)
+        public MenuItem(string snapShotID, MenuItemRequest itemToCopy, MenuCategory cat)
         {
             Id = itemToCopy.Id;
 
             Name = itemToCopy.Name;
             Description = itemToCopy.Description;
             Category = cat;
-            Versions.Add(new(itemToCopy.Id, itemToCopy.Price, itemToCopy.EffectiveDate));
+            Versions.Add(new(snapShotID, itemToCopy.Price, itemToCopy.EffectiveDate));
         }
 
       
