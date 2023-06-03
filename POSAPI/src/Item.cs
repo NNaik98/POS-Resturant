@@ -13,4 +13,5 @@ namespace POSAPI.src
 
         // double getPrice()
     }
+
 }
