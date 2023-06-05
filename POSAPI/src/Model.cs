@@ -42,7 +42,7 @@ namespace POSAPI
             {
                 try
                 {
-                    guid = Guid.NewGuid().ToString();
+                    guid = Guid.NewGuid().ToString().Replace("-", "");
                     isAlreadyUsed = Set<T>().AsEnumerable().Any(o => o.GetType().GetProperty("Id").Equals(guid));
                 }
                 catch (Exception)
@@ -56,7 +56,7 @@ namespace POSAPI
             }
             while (isAlreadyUsed);
 
-            return guid.Replace("-", "");
+            return guid;
         }
 
         public void Init()
